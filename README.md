@@ -202,3 +202,4 @@ rm news.db
 ## License
 
 MIT License
+## API Documentation
