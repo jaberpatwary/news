@@ -10,6 +10,8 @@ import (
 	"news-portal/src/config"
 	"news-portal/src/database"
 	"news-portal/src/router"
+
+	"github.com/joho/godotenv"
 )
 
 func init() {
@@ -19,6 +21,8 @@ func init() {
 			os.Chdir("..")
 		}
 	}
+
+	godotenv.Load()
 }
 
 func main() {

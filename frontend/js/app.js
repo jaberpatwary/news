@@ -114,7 +114,9 @@ async function loadArticles() {
             });
             
             div.innerHTML = `
-                <div class="article-image">📰</div>
+                <div class="article-image">
+                    ${article.image ? `<img src="${article.image}" alt="${article.title}" style="width: 100%; height: 100%; object-fit: cover;">` : '📰'}
+                </div>
                 <div class="article-content">
                     <span class="category">${article.category}</span>
                     <h3>${article.title}</h3>
@@ -150,6 +152,7 @@ async function openArticle(id) {
         const detailDiv = document.getElementById('articleDetail');
         detailDiv.innerHTML = `
             <div class="article-detail">
+                ${article.image ? `<img src="${article.image}" alt="${article.title}" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; margin-bottom: 20px;">` : ''}
                 <h1>${article.title}</h1>
                 <div class="detail-meta">
                     <strong>${article.category}</strong> | লেখক: ${article.author} | ${date}

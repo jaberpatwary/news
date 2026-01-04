@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"log"
 	"news-portal/src/database"
 	"news-portal/src/model"
@@ -11,16 +12,19 @@ type ArticleService struct{}
 func (s *ArticleService) GetAllArticles(category, search string) ([]model.Article, error) {
 	query := "SELECT id, title, content, category, author, image, created, featured FROM articles WHERE 1=1"
 	var args []interface{}
+	placeholder := 1
 
 	if category != "" && category != "সব" {
-		query += " AND category = ?"
+		query += fmt.Sprintf(" AND category = $%d", placeholder)
 		args = append(args, category)
+		placeholder++
 	}
 
 	if search != "" {
-		query += " AND (title LIKE ? OR content LIKE ?)"
+		query += fmt.Sprintf(" AND (title LIKE $%d OR content LIKE $%d)", placeholder, placeholder+1)
 		searchTerm := "%" + search + "%"
 		args = append(args, searchTerm, searchTerm)
+		placeholder += 2
 	}
 
 	query += " ORDER BY created DESC LIMIT 50"
@@ -46,7 +50,7 @@ func (s *ArticleService) GetAllArticles(category, search string) ([]model.Articl
 }
 
 func (s *ArticleService) GetFeaturedArticles() ([]model.Article, error) {
-	rows, err := database.DB.Query("SELECT id, title, content, category, author, image, created, featured FROM articles WHERE featured = 1 ORDER BY created DESC LIMIT 5")
+	rows, err := database.DB.Query("SELECT id, title, content, category, author, image, created, featured FROM articles WHERE featured = true ORDER BY created DESC LIMIT 5")
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +72,7 @@ func (s *ArticleService) GetFeaturedArticles() ([]model.Article, error) {
 
 func (s *ArticleService) GetArticleByID(id string) (*model.Article, error) {
 	var a model.Article
-	err := database.DB.QueryRow("SELECT id, title, content, category, author, image, created, featured FROM articles WHERE id = ?", id).Scan(
+	err := database.DB.QueryRow("SELECT id, title, content, category, author, image, created, featured FROM articles WHERE id = $1", id).Scan(
 		&a.ID, &a.Title, &a.Content, &a.Category, &a.Author, &a.Image, &a.Created, &a.Featured,
 	)
 	if err != nil {
@@ -79,18 +83,12 @@ func (s *ArticleService) GetArticleByID(id string) (*model.Article, error) {
 }
 
 func (s *ArticleService) CreateArticle(article *model.Article) (*model.Article, error) {
-	query := `INSERT INTO articles (title, content, category, author, image, featured) VALUES (?, ?, ?, ?, ?, ?)`
-	result, err := database.DB.Exec(query, article.Title, article.Content, article.Category, article.Author, article.Image, article.Featured)
+	query := `INSERT INTO articles (title, content, category, author, image, featured) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`
+	err := database.DB.QueryRow(query, article.Title, article.Content, article.Category, article.Author, article.Image, article.Featured).Scan(&article.ID)
 	if err != nil {
 		return nil, err
 	}
 
-	id, err := result.LastInsertId()
-	if err != nil {
-		return nil, err
-	}
-
-	article.ID = int(id)
 	return article, nil
 }
 

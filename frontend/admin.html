@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অ্যাডমিন - দৈনিক খবর</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">দৈনিক খবর - অ্যাডমিন</h1>
+            <p class="tagline">খবর যোগ করুন</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="admin-section">
+            <h2>নতুন খবর যোগ করুন</h2>
+            <form id="articleForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">শিরোনাম:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">বিস্তারিত:</label>
+                    <textarea id="content" name="content" rows="10" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">ক্যাটাগরি:</label>
+                    <select id="category" name="category" required>
+                        <option value="">ক্যাটাগরি নির্বাচন করুন</option>
+                        <option value="রাজনীতি">রাজনীতি</option>
+                        <option value="অর্থনীতি">অর্থনীতি</option>
+                        <option value="খেলা">খেলা</option>
+                        <option value="বিনোদন">বিনোদন</option>
+                        <option value="স্বাস্থ্য">স্বাস্থ্য</option>
+                        <option value="শিক্ষা">শিক্ষা</option>
+                        <option value="প্রযুক্তি">প্রযুক্তি</option>
+                        <option value="অন্যান্য">অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="author">লেখক:</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">ছবি:</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                    <div id="imagePreview"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="featured" name="featured"> প্রধান খবর
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit">খবর যোগ করুন</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2027 দৈনিক খবর | সব অধিকার সংরক্ষিত</p>
+        </div>
+    </footer>
+
+    <script src="/frontend/js/admin.js"></script>
+</body>
+</html></content>
+<parameter name="filePath">/home/jaber/Desktop/news-portal/frontend/admin.html

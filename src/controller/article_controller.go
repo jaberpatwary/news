@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -99,9 +100,12 @@ func (c *ArticleController) AddArticle(w http.ResponseWriter, r *http.Request) {
 	var a model.Article
 	err := json.NewDecoder(r.Body).Decode(&a)
 	if err != nil {
+		log.Printf("Error decoding JSON: %v", err)
 		http.Error(w, "Invalid JSON", http.StatusBadRequest)
 		return
 	}
+
+	log.Printf("Adding article: %+v", a)
 
 	// Validate article
 	if validationErrors := validation.ValidateArticle(&a); len(validationErrors) > 0 {
@@ -115,6 +119,7 @@ func (c *ArticleController) AddArticle(w http.ResponseWriter, r *http.Request) {
 
 	article, err := c.service.CreateArticle(&a)
 	if err != nil {
+		log.Printf("Error inserting article: %v", err)
 		http.Error(w, "Error inserting article: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -140,6 +145,7 @@ func (c *ArticleController) UploadImage(w http.ResponseWriter, r *http.Request) 
 	// Create uploads directory if it doesn't exist
 	uploadsDir := config.UPLOADS_DIR
 	if err := os.MkdirAll(uploadsDir, 0755); err != nil {
+		log.Printf("Error creating uploads directory: %v", err)
 		http.Error(w, "Error creating uploads directory", http.StatusInternalServerError)
 		return
 	}
@@ -147,12 +153,14 @@ func (c *ArticleController) UploadImage(w http.ResponseWriter, r *http.Request) 
 	// Parse file upload
 	err := r.ParseMultipartForm(config.MAX_FILE_SIZE)
 	if err != nil {
+		log.Printf("Error parsing multipart form: %v", err)
 		http.Error(w, "File too large", http.StatusBadRequest)
 		return
 	}
 
 	file, handler, err := r.FormFile("image")
 	if err != nil {
+		log.Printf("Error retrieving file: %v", err)
 		http.Error(w, "Error retrieving file", http.StatusBadRequest)
 		return
 	}
@@ -165,6 +173,7 @@ func (c *ArticleController) UploadImage(w http.ResponseWriter, r *http.Request) 
 	// Save file
 	dst, err := os.Create(filePath)
 	if err != nil {
+		log.Printf("Error creating file: %v", err)
 		http.Error(w, "Error saving file", http.StatusInternalServerError)
 		return
 	}
@@ -173,11 +182,13 @@ func (c *ArticleController) UploadImage(w http.ResponseWriter, r *http.Request) 
 	// Copy file content
 	_, err = io.Copy(dst, file)
 	if err != nil {
+		log.Printf("Error writing file: %v", err)
 		http.Error(w, "Error writing file", http.StatusInternalServerError)
 		return
 	}
 
 	imageURL := "/frontend/uploads/" + filename
+	log.Printf("Image uploaded successfully: %s", imageURL)
 
 	response := model.ImageUploadResponse{
 		Message: "Image uploaded successfully",
