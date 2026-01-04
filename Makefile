@@ -41,3 +41,6 @@ fmt:
 lint:
 	@command -v golangci-lint > /dev/null || go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 	golangci-lint run ./...
+.PHONY: docker
+docker:
+	docker-compose up -d
