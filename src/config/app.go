@@ -7,7 +7,7 @@ import (
 
 const (
 	SERVER_PORT_DEFAULT     = ":9999"
-	UPLOADS_DIR             = "static/uploads"
+	UPLOADS_DIR             = "frontend/uploads"
 	MAX_FILE_SIZE           = 10 << 20 // 10 MB
 	MAX_UPLOAD_SIZE_DEFAULT = 10485760
 )

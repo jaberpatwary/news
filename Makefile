@@ -18,7 +18,7 @@ build:
 clean:
 	rm -f news-portal
 	rm -f news.db
-	rm -rf static/uploads/*
+	rm -rf frontend/uploads/*
 
 test:
 	go test ./...

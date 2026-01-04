@@ -177,7 +177,7 @@ func (c *ArticleController) UploadImage(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	imageURL := "/static/uploads/" + filename
+	imageURL := "/frontend/uploads/" + filename
 
 	response := model.ImageUploadResponse{
 		Message: "Image uploaded successfully",
