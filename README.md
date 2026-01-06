@@ -201,3 +201,5 @@ rm news.db
 
 MIT License
 ## API Documentation
+
+Reference: Admin panel optimizations and Bengali localization applied.
