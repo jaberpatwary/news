@@ -1,0 +1,531 @@
+nohup: ignoring input
+WARNING:(ast) sonic only supports go1.17~1.23, but your environment is not suitable
+2026/01/09 10:04:04 Config file loaded from ./
+
+ ┌───────────────────────────────────────────────────┐ 
+ │                     Fiber API                     │ 
+ │                   Fiber v2.52.5                   │ 
+ │               http://127.0.0.1:9998               │ 
+ │                                                   │ 
+ │ Handlers ............ 89  Processes ........... 1 │ 
+ │ Prefork ....... Disabled  PID ............. 54413 │ 
+ └───────────────────────────────────────────────────┘ 
+
+10:04:32.51 GET 200 /api/categories in      965.77µs
+
+2026/01/09 10:04:32 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[11.578ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+10:04:32.51 GET 200 /api/featured in   19.542158ms
+
+2026/01/09 10:04:32 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[19.994ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+10:04:32.51 GET 200 /api/articles in    24.91065ms
+
+2026/01/09 10:04:41 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.196ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE featured = true AND category = 'রাজনীতি' ORDER BY created_at desc
+10:04:41.52 GET 200 /api/featured in    1.565569ms
+10:04:50.54 GET 200 /api/categories in     201.274µs
+
+2026/01/09 10:04:50 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.153ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 10:04:50 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.758ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+10:04:50.54 GET 200 /api/featured in    4.456996ms
+10:04:50.54 GET 200 /api/articles in     5.64443ms
+
+2026/01/09 10:05:00 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.997ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'রাজনীতি' ORDER BY created_at desc
+10:05:00.05 GET 200 /api/articles in   12.582117ms
+
+2026/01/09 10:05:00 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[2.599ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE featured = true AND category = 'রাজনীতি' ORDER BY created_at desc
+10:05:00.05 GET 200 /api/featured in   11.585641ms
+
+2026/01/09 10:05:28 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.787ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE featured = true AND category = 'খেলাধুলা' ORDER BY created_at desc
+10:05:28.59 GET 200 /api/featured in    1.192493ms
+
+2026/01/09 10:05:28 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.900ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'খেলাধুলা' ORDER BY created_at desc
+10:05:28.59 GET 200 /api/articles in    1.752748ms
+
+2026/01/09 10:05:38 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.366ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+
+2026/01/09 10:05:38 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.159ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+10:05:38.61 GET 200 /api/featured in    4.209209ms
+10:05:38.61 GET 200 /api/articles in    6.184406ms
+
+2026/01/09 10:05:49 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[2.081ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE featured = true AND category = 'রাজনীতি' ORDER BY created_at desc
+
+2026/01/09 10:05:49 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.903ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'রাজনীতি' ORDER BY created_at desc
+10:05:48.63 GET 200 /api/featured in   10.466687ms
+10:05:48.63 GET 200 /api/articles in     9.05814ms
+
+2026/01/09 10:05:59 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.591ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'খেলাধুলা' ORDER BY created_at desc
+10:05:59.14 GET 200 /api/articles in    2.157288ms
+
+2026/01/09 10:05:59 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.141ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE featured = true AND category = 'খেলাধুলা' ORDER BY created_at desc
+10:05:59.14 GET 200 /api/featured in    1.988075ms
+10:07:07.24 GET 200 /api/categories in     673.562µs
+
+2026/01/09 10:07:07 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.576ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 10:07:07 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.768ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+10:07:07.24 GET 200 /api/featured in    4.164308ms
+10:07:07.24 GET 200 /api/articles in     8.48931ms
+
+2026/01/09 10:07:09 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.851ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+
+2026/01/09 10:07:09 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.879ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE featured = true AND category = 'জাতীয়' ORDER BY created_at desc
+10:07:09.24 GET 200 /api/featured in    1.370778ms
+10:07:09.24 GET 200 /api/articles in    3.945156ms
+
+2026/01/09 10:07:22 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[2.267ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 10:07:22 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.974ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+10:07:22.26 GET 200 /api/featured in    5.449759ms
+10:07:22.26 GET 200 /api/articles in    9.241671ms
+
+2026/01/09 10:07:43 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[3.383ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+
+2026/01/09 10:07:43 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[3.644ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE featured = true AND category = 'জাতীয়' ORDER BY created_at desc
+10:07:43.29 GET 200 /api/featured in    4.671441ms
+10:07:43.29 GET 200 /api/articles in   10.608264ms
+
+2026/01/09 10:07:48 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:53
+[0m[33m[2.555ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE "articles"."id" = 1 ORDER BY "articles"."id" LIMIT 1
+10:07:48.80 GET 200 /api/article in    3.380287ms
+
+2026/01/09 10:07:51 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:53
+[0m[33m[1.912ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE "articles"."id" = 12 ORDER BY "articles"."id" LIMIT 1
+10:07:51.80 GET 200 /api/article in    5.441778ms
+
+2026/01/09 10:08:09 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.723ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE category = 'অন্যান্য' ORDER BY created_at desc
+10:08:09.33 GET 200 /api/articles in    2.117516ms
+
+2026/01/09 10:08:09 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.543ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE featured = true AND category = 'অন্যান্য' ORDER BY created_at desc
+10:08:09.33 GET 200 /api/featured in    1.927626ms
+
+2026/01/09 10:08:14 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.823ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE category = 'বিনোদন' ORDER BY created_at desc
+10:08:14.34 GET 200 /api/articles in    2.213736ms
+
+2026/01/09 10:08:14 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.688ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE featured = true AND category = 'বিনোদন' ORDER BY created_at desc
+10:08:14.34 GET 200 /api/featured in    1.942822ms
+
+2026/01/09 10:08:15 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.770ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'স্বাস্থ্য' ORDER BY created_at desc
+10:08:15.34 GET 200 /api/articles in    2.900694ms
+
+2026/01/09 10:08:15 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[2.639ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE featured = true AND category = 'স্বাস্থ্য' ORDER BY created_at desc
+10:08:15.84 GET 200 /api/featured in    3.340664ms
+
+2026/01/09 10:08:17 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.057ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'প্রযুক্তি' ORDER BY created_at desc
+10:08:16.84 GET 200 /api/articles in    3.196233ms
+
+2026/01/09 10:08:17 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[3.784ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE featured = true AND category = 'প্রযুক্তি' ORDER BY created_at desc
+10:08:16.84 GET 200 /api/featured in    6.718405ms
+
+2026/01/09 10:08:19 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.536ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'খেলাধুলা' ORDER BY created_at desc
+10:08:18.85 GET 200 /api/articles in    2.565458ms
+
+2026/01/09 10:08:19 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.930ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE featured = true AND category = 'খেলাধুলা' ORDER BY created_at desc
+10:08:18.85 GET 200 /api/featured in    2.266352ms
+
+2026/01/09 10:08:23 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.822ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'রাজনীতি' ORDER BY created_at desc
+
+2026/01/09 10:08:23 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[4.849ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE featured = true AND category = 'রাজনীতি' ORDER BY created_at desc
+10:08:23.35 GET 200 /api/articles in    8.270168ms
+10:08:23.35 GET 200 /api/featured in   13.593962ms
+
+2026/01/09 10:08:25 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.484ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE featured = true AND category = 'জাতীয়' ORDER BY created_at desc
+
+2026/01/09 10:08:25 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[3.374ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+10:08:25.35 GET 200 /api/featured in    2.956233ms
+10:08:25.35 GET 200 /api/articles in   11.395966ms
+10:08:35.37 GET 200 /api/categories in     204.997µs
+
+2026/01/09 10:08:35 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.284ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+
+2026/01/09 10:08:35 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.232ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+10:08:35.37 GET 200 /api/featured in    3.160112ms
+10:08:35.37 GET 200 /api/articles in    4.949546ms
+10:08:36.37 GET 200 /api/categories in      216.77µs
+
+2026/01/09 10:08:36 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.284ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+
+2026/01/09 10:08:36 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[2.523ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+10:08:36.37 GET 200 /api/featured in     4.66074ms
+10:08:36.37 GET 200 /api/articles in    5.898437ms
+10:11:00.05 GET 200 /api/categories in     204.252µs
+
+2026/01/09 10:11:00 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.671ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 10:11:00 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.749ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+10:11:00.05 GET 200 /api/featured in    7.678363ms
+10:11:00.05 GET 200 /api/articles in   11.309748ms
+
+2026/01/09 10:11:12 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.252ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'রাজনীতি' ORDER BY created_at desc
+10:11:12.57 GET 200 /api/articles in    5.657229ms
+
+2026/01/09 10:11:27 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.255ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+
+2026/01/09 10:11:27 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[2.038ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+10:11:27.59 GET 200 /api/featured in   10.501513ms
+10:11:27.59 GET 200 /api/articles in   12.362082ms
+17:17:58.89 GET 200 /api/categories in     697.583µs
+
+2026/01/09 17:17:59 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[14.796ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+17:17:58.89 GET 200 /api/featured in   17.899293ms
+
+2026/01/09 17:17:59 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[10.397ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:17:58.89 GET 200 /api/articles in   13.099876ms
+
+2026/01/09 17:18:33 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[3.578ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+17:18:32.94 GET 200 /api/articles in    8.634747ms
+
+2026/01/09 17:18:42 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:53
+[0m[33m[2.610ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE "articles"."id" = 10 ORDER BY "articles"."id" LIMIT 1
+17:18:42.46 GET 200 /api/article in    7.732106ms
+
+2026/01/09 17:18:45 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.340ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'রাজনীতি' ORDER BY created_at desc
+17:18:45.46 GET 200 /api/articles in    6.165789ms
+
+2026/01/09 17:18:47 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.632ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'খেলাধুলা' ORDER BY created_at desc
+17:18:47.46 GET 200 /api/articles in    2.796628ms
+
+2026/01/09 17:18:48 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.745ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'প্রযুক্তি' ORDER BY created_at desc
+17:18:48.46 GET 200 /api/articles in    3.188359ms
+
+2026/01/09 17:18:49 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.789ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'স্বাস্থ্য' ORDER BY created_at desc
+17:18:49.97 GET 200 /api/articles in    2.855468ms
+
+2026/01/09 17:18:51 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.513ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE category = 'বিনোদন' ORDER BY created_at desc
+17:18:50.97 GET 200 /api/articles in    1.915882ms
+
+2026/01/09 17:18:52 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.273ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE category = 'আন্তর্জাতিক' ORDER BY created_at desc
+17:18:52.97 GET 200 /api/articles in    1.605886ms
+
+2026/01/09 17:18:54 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.422ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE category = 'অন্যান্য' ORDER BY created_at desc
+17:18:53.97 GET 200 /api/articles in    1.763735ms
+
+2026/01/09 17:18:55 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[3.613ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:18:55 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[4.952ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:18:55.47 GET 200 /api/featured in   10.144724ms
+17:18:55.47 GET 200 /api/articles in   14.888558ms
+17:20:11.56 POST 200 /api/auth/login in      408.31µs
+
+2026/01/09 17:20:12 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.298ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:20:12.57 GET 200 /api/articles in    5.950771ms
+
+2026/01/09 17:20:31 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.739ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:20:30.59 GET 200 /api/articles in    3.522136ms
+
+2026/01/09 17:22:02 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.626ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:22:02.19 GET 200 /api/articles in    2.906287ms
+17:23:47.32 GET 200 /api/categories in     203.135µs
+
+2026/01/09 17:23:47 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.800ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:23:47 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.214ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:23:47.32 GET 200 /api/featured in    2.478372ms
+17:23:47.32 GET 200 /api/articles in    4.433086ms
+
+2026/01/09 17:24:07 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.748ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+17:24:06.85 GET 200 /api/articles in    5.883348ms
+17:29:21.77 GET 200 /api/categories in     743.771µs
+
+2026/01/09 17:29:21 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.077ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+17:29:21.77 GET 200
+2026/01/09 17:29:21 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.683ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+ /api/featured in    4.166796ms
+17:29:21.77 GET 200 /api/articles in    6.265315ms
+17:29:26.28 GET 200 /api/categories in     162.779µs
+
+2026/01/09 17:29:26 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.083ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+
+2026/01/09 17:29:26 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[2.203ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+17:29:26.28 GET 200 /api/featured in    5.416271ms
+17:29:26.28 GET 200 /api/articles in    5.899182ms
+17:33:09.54 GET 200 /api/categories in     182.898µs
+
+2026/01/09 17:33:09 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.919ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+
+2026/01/09 17:33:09 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[2.421ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+17:33:09.54 GET 200 /api/featured in    4.975019ms
+17:33:09.54 GET 200 /api/articles in    4.992906ms
+17:33:10.04 GET 200 /api/categories in     169.287µs
+
+2026/01/09 17:33:10 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.640ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:10 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.922ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:10.04 GET 200 /api/featured in    2.454022ms
+17:33:10.04 GET 200 /api/articles in    4.218168ms
+17:33:29.06 GET 200 /api/categories in     140.361µs
+
+2026/01/09 17:33:29 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.804ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:29 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.107ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:29.06 GET 200 /api/featured in    2.624695ms
+17:33:29.06 GET 200 /api/articles in    3.460421ms
+17:33:29.56 GET 200 /api/categories in     189.951µs
+
+2026/01/09 17:33:29 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.633ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:29 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.870ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:29.56 GET 200 /api/featured in    1.682143ms
+17:33:29.56 GET 200 /api/articles in    4.348487ms
+17:33:29.56 GET 200 /api/categories in     596.118µs
+
+2026/01/09 17:33:29 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.702ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:29 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.069ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:29.56 GET 200 /api/featured in    2.410479ms
+17:33:29.56 GET 200 /api/articles in    4.215892ms
+17:33:30.07 GET 200 /api/categories in     369.535µs
+
+2026/01/09 17:33:30 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.358ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:30 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.801ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:30.07 GET 200 /api/featured in     4.87748ms
+17:33:30.07 GET 200 /api/articles in    8.947995ms
+17:33:30.07 GET 200 /api/categories in     246.806µs
+
+2026/01/09 17:33:30 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.804ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:30 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.328ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:30.07 GET 200 /api/featured in    2.576437ms
+17:33:30.07 GET 200 /api/articles in    4.356173ms
+17:33:30.07 GET 200 /api/categories in     227.982µs
+
+2026/01/09 17:33:30 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.715ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:30 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.996ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:30.07 GET 200 /api/featured in    2.320411ms
+17:33:30.07 GET 200 /api/articles in    4.583391ms
+17:33:30.57 GET 200 /api/categories in     181.048µs
+
+2026/01/09 17:33:30 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.928ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:30 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.942ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:30.57 GET 200 /api/featured in    2.630566ms
+17:33:30.57 GET 200 /api/articles in    4.264851ms
+17:33:30.57 GET 200 /api/categories in     936.848µs
+
+2026/01/09 17:33:30 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.058ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+
+2026/01/09 17:33:30 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[3.683ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+17:33:30.57 GET 200 /api/featured in    6.216461ms
+17:33:30.57 GET 200 /api/articles in    7.799591ms
+17:33:31.07 GET 200 /api/categories in      152.37µs
+
+2026/01/09 17:33:31 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.579ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:31 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.926ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:31.07 GET 200 /api/featured in    1.909142ms
+17:33:31.07 GET 200 /api/articles in    3.079787ms
+17:33:32.07 GET 200 /api/categories in     225.198µs
+
+2026/01/09 17:33:32 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.826ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:32 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.177ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:32.07 GET 200 /api/featured in    2.993545ms
+17:33:32.07 GET 200 /api/articles in     4.97454ms
+17:33:32.57 GET 200 /api/categories in     169.996µs
+
+2026/01/09 17:33:32 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[0.619ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:33:32 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.032ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:33:32.57 GET 200 /api/featured in    2.020714ms
+17:33:32.57 GET 200 /api/articles in    3.912233ms
+
+2026/01/09 17:33:33 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:53
+[0m[33m[0.911ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE "articles"."id" = 1 ORDER BY "articles"."id" LIMIT 1
+17:33:33.57 GET 200 /api/article in    1.349533ms
+
+2026/01/09 17:33:35 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:53
+[0m[33m[1.832ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE "articles"."id" = 11 ORDER BY "articles"."id" LIMIT 1
+17:33:35.57 GET 200 /api/article in    4.933363ms
+
+2026/01/09 17:33:57 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:53
+[0m[33m[0.764ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE "articles"."id" = 11 ORDER BY "articles"."id" LIMIT 1
+17:33:57.10 GET 200 /api/article in    2.080607ms
+
+2026/01/09 17:34:11 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:53
+[0m[33m[0.583ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE "articles"."id" = 12 ORDER BY "articles"."id" LIMIT 1
+17:34:11.12 GET 200 /api/article in    1.700338ms
+
+2026/01/09 17:34:22 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.398ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+17:34:22.14 GET 200 /api/articles in    3.964699ms
+
+2026/01/09 17:34:26 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.037ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'রাজনীতি' ORDER BY created_at desc
+17:34:26.64 GET 200 /api/articles in    2.271514ms
+
+2026/01/09 17:34:28 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.333ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 17:34:28 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[2.083ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+17:34:28.65 GET 200 /api/featured in    4.361113ms
+17:34:28.65 GET 200 /api/articles in    7.863283ms
+
+2026/01/09 17:34:31 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.862ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+17:34:31.65 GET 200 /api/articles in    3.742092ms
+
+2026/01/09 17:34:35 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.645ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+17:34:35.15 GET 200 /api/articles in    6.100555ms
+
+2026/01/09 17:34:35 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.521ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+17:34:35.15 GET 200 /api/articles in    2.141349ms
+
+2026/01/09 17:34:35 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.522ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+17:34:35.65 GET 200 /api/articles in    2.139478ms
+
+2026/01/09 17:34:36 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.509ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+17:34:35.65 GET 200 /api/articles in    2.117319ms
+
+2026/01/09 17:34:38 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.920ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'রাজনীতি' ORDER BY created_at desc
+17:34:37.66 GET 200 /api/articles in    5.704911ms
+
+2026/01/09 17:34:40 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.356ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'খেলাধুলা' ORDER BY created_at desc
+17:34:39.66 GET 200 /api/articles in    2.363093ms
+
+2026/01/09 17:34:41 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.464ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'প্রযুক্তি' ORDER BY created_at desc
+17:34:41.16 GET 200 /api/articles in     773.035µs
+
+2026/01/09 17:34:43 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.479ms] [34;1m[rows:1][0m SELECT * FROM "articles" WHERE category = 'স্বাস্থ্য' ORDER BY created_at desc
+17:34:43.17 GET 200 /api/articles in     883.314µs
+
+2026/01/09 17:34:44 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.916ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE category = 'বিনোদন' ORDER BY created_at desc
+17:34:43.67 GET 200 /api/articles in    1.237447ms
+
+2026/01/09 17:34:49 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.445ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE category = 'আন্তর্জাতিক' ORDER BY created_at desc
+17:34:49.18 GET 200 /api/articles in     565.437µs
+
+2026/01/09 17:34:50 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.869ms] [34;1m[rows:0][0m SELECT * FROM "articles" WHERE category = 'অন্যান্য' ORDER BY created_at desc
+17:34:50.18 GET 200 /api/articles in     1.29859ms
+
+2026/01/09 17:34:51 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[0.584ms] [34;1m[rows:4][0m SELECT * FROM "articles" WHERE category = 'জাতীয়' ORDER BY created_at desc
+17:34:51.18 GET 200 /api/articles in    2.144896ms
+21:51:02.40 GET 200 /api/categories in     678.135µs
+
+2026/01/09 21:51:02 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[13.765ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 21:51:02 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[13.933ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+21:51:02.40 GET 200 /api/featured in   16.397218ms
+21:51:02.40 GET 200 /api/articles in    16.89471ms
+21:56:52.43 GET 200 /api/categories in     646.768µs
+
+2026/01/09 21:56:52 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:71
+[0m[33m[1.509ms] [34;1m[rows:3][0m SELECT * FROM "articles" WHERE featured = true ORDER BY created_at desc
+
+2026/01/09 21:56:52 [32m/home/jaber/Desktop/chatgpt/9-1/news-project-single-frontend/src/service/article_service.go:45
+[0m[33m[1.223ms] [34;1m[rows:8][0m SELECT * FROM "articles" ORDER BY created_at desc
+21:56:52.43 GET 200 /api/featured in    4.641146ms
+21:56:52.43 GET 200 /api/articles in     5.49579ms
+make: *** [Makefile:5: start] Terminated
+[36mINFO[0m[23:56:42.572] Shutting down server...                      
+[36mINFO[0m[23:56:42.689] Server exited                                
+[36mINFO[0m[23:56:42.689] Database connection closed successfully      

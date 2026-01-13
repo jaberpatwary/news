@@ -4,18 +4,14 @@ import "time"
 
 type Article struct {
 	ID       int       `gorm:"primaryKey" json:"id"`
-	Title    string    `json:"title"`
-	Content  string    `json:"content"`
-	Category string    `json:"category"`
-	Author   string    `json:"author"`
+	Title    string    `json:"title" gorm:"type:text;not null"`
+	Content  string    `json:"content" gorm:"type:text;not null"`
+	Category string    `json:"category" gorm:"type:varchar(255);not null;index"`
+	Author   string    `json:"author" gorm:"type:varchar(255);not null"`
 	Image    *string   `json:"image"`
-	Created  time.Time `json:"created" gorm:"column:created_at"`
-	Featured bool      `json:"featured"`
-}
-
-// TableName specifies the table name for GORM
-func (Article) TableName() string {
-	return "articles"
+	Created   time.Time `json:"created" gorm:"column:created_at;index"`
+	UpdatedAt time.Time `json:"updated_at" gorm:"autoUpdateTime;index"`
+	Featured  bool      `json:"featured" gorm:"default:false;index"`
 }
 
 type Response struct {

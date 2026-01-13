@@ -112,15 +112,77 @@
                 opacity: 1;
             }
         }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            padding: 8px 35px 8px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            width: 180px;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            backdrop-filter: blur(5px);
+            transition: all 0.2s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            width: 220px;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon svg {
+            width: 14px;
+            height: 14px;
+        }
     </style>
 </head>
 
 <body>
 
     <header class="header">
-        <div class="container">
-            <h1>অ্যাডমিন প্যানেল</h1>
-            <p class="tagline">নতুন খবর প্রকাশ করুন</p>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1>অ্যাডমিন প্যানেল</h1>
+                <p class="tagline">নতুন খবর প্রকাশ করুন</p>
+            </div>
+            <div>
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <div class="search-box">
+                        <input type="text" id="adminSearchInput" placeholder="খবর খুঁজুন..."
+                            onkeypress="if(event.key === 'Enter') adminSearch()">
+                        <span class="search-icon" onclick="adminSearch()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </span>
+                    </div>
+                    <a href="/dashboard" class="btn-submit"
+                        style="background: #28a745; text-decoration: none; display: flex; align-items: center; justify-content: center; margin: 0; width: 140px; height: 42px; padding: 0; font-size: 0.9rem;">📊
+                        ড্যাশবোর্ড</a>
+                    <button onclick="logout()" class="btn-submit"
+                        style="background: #dc3545; display: flex; align-items: center; justify-content: center; margin: 0; width: 140px; height: 42px; padding: 0; font-size: 0.9rem;">🚪
+                        লগআউট</button>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -131,7 +193,9 @@
 
                 <div class="form-group">
                     <label>খবরের শিরোনাম</label>
-                    <input type="text" id="title" required placeholder="শিরোনাম লিখুন...">
+                    <input type="text" id="title" required placeholder="শিরোনাম লিখুন..." maxlength="10000"
+                        oninput="document.getElementById('titleCount').innerText = this.value.length + ' characters'">
+                    <small id="titleCount" style="color: grey;">0 characters</small>
                 </div>
 
                 <div class="form-group">
@@ -153,6 +217,12 @@
                         <option value="আন্তর্জাতিক">আন্তর্জাতিক</option>
                         <option value="অন্যান্য">অন্যান্য</option>
                     </select>
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px; padding: 10px 0;">
+                    <input type="checkbox" id="featured" style="width: 20px; height: 20px; cursor: pointer;">
+                    <label for="featured" style="margin: 0; cursor: pointer; font-size: 16px;">প্রধান খবর হিসেবে
+                        দেখান</label>
                 </div>
 
                 <div class="form-group">
@@ -190,6 +260,13 @@
 
     <!-- জাভাস্ক্রিপ্ট -->
     <script>
+        function logout() {
+            sessionStorage.clear();
+            // Clear auth cookie
+            document.cookie = "auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            window.location.href = '/login';
+        }
+
         let uploadedImageUrl = "";
 
         // পপআপ ফাংশন
@@ -309,7 +386,7 @@
                 category: document.getElementById('category').value,
                 author: document.getElementById('author').value,
                 image: uploadedImageUrl,
-                featured: false
+                featured: document.getElementById('featured').checked
             };
 
             try {
@@ -344,6 +421,15 @@
                 btn.disabled = false;
             }
         });
+
+        function adminSearch() {
+            const query = document.getElementById('adminSearchInput').value;
+            if (query.trim()) {
+                window.location.href = `/dashboard?search=${encodeURIComponent(query)}`;
+            } else {
+                window.location.href = '/dashboard';
+            }
+        }
     </script>
 </body>
 

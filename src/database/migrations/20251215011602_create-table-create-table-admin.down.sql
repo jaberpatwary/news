@@ -1,0 +1,8 @@
+BEGIN;
+
+ALTER TABLE com
+DROP CONSTRAINT IF EXISTS fk_com_approvedby_admin;
+
+DROP TABLE IF EXISTS admin;
+
+COMMIT;

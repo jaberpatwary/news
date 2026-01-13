@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অ্যাডমিন লগইন - নিউজ পোর্টাল</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #667eea;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #5a6fd6;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #ef4444;
+            border: 1px solid #fecaca;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-card">
+        <h2>অ্যাডমিন প্যানেল</h2>
+        <div id="alertBox" class="alert"></div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>ইউজারনেম</label>
+                <input type="text" id="username" required placeholder="আপনার ইউজারনেম">
+            </div>
+            <div class="form-group">
+                <label>পাসওয়ার্ড</label>
+                <input type="password" id="password" required placeholder="আপনার পাসওয়ার্ড">
+            </div>
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">ইউজারনেম মনে রাখুন</label>
+            </div>
+            <button type="submit" id="loginBtn">লগইন করুন</button>
+        </form>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const alertBox = document.getElementById('alertBox');
+
+        // Load remembered user
+        if (localStorage.getItem('rememberedUser')) {
+            document.getElementById('username').value = localStorage.getItem('rememberedUser');
+            document.getElementById('rememberMe').checked = true;
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'প্রবেশ করা হচ্ছে...';
+            alertBox.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: username, password: password })
+                });
+                const result = await response.json();
+
+                if (response.ok && result.token) {
+                    // Session data for JS logic
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    sessionStorage.setItem('authToken', result.token);
+                    sessionStorage.setItem('adminName', username);
+
+                    if (rememberMe) {
+                        localStorage.setItem('rememberedUser', username);
+                    } else {
+                        localStorage.removeItem('rememberedUser');
+                    }
+
+                    // Direct redirect - Backend will now see the cookie set by the server
+                    window.location.replace('/dashboard');
+                } else {
+                    alertBox.textContent = result.message || 'ইউজারনেম বা পাসওয়ার্ড সঠিক নয়';
+                    alertBox.style.display = 'block';
+                    alertBox.className = 'alert alert-error';
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'লগইন করুন';
+                }
+            } catch (err) {
+                alertBox.textContent = 'সার্ভার পাওয়া যাচ্ছে না';
+                alertBox.style.display = 'block';
+                alertBox.className = 'alert alert-error';
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'লগইন করুন';
+            }
+        });
+    </script>
+</body>
+
+</html>

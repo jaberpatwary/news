@@ -1,67 +1,113 @@
 package main
 
 import (
+	"app/src/config"
+	"app/src/database"
+	"app/src/middleware"
+	"app/src/router"
+	"app/src/utils"
+	"context"
 	"fmt"
-	"log"
-	"net/http"
 	"os"
-	"path/filepath"
+	"os/signal"
+	"syscall"
 
-	"news-portal/src/config"
-	"news-portal/src/database"
-	"news-portal/src/router"
-
-	"github.com/joho/godotenv"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/compress"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/helmet"
+	"gorm.io/gorm"
 )
 
-func init() {
-	// Change to project root if in src directory
-	if wd, err := os.Getwd(); err == nil {
-		if filepath.Base(wd) == "src" {
-			os.Chdir("..")
-		}
+// @title go-fiber-boilerplate API documentation
+// @version 1.0.0
+// @license.name MIT
+// @license.url https://github.com/indrayyana/go-fiber-boilerplate/blob/main/LICENSE
+// @host localhost:3000
+// @BasePath /v1
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+// @description Example Value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+func main() {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	app := setupFiberApp()
+	db := setupDatabase()
+	defer closeDatabase(db)
+	setupRoutes(app, db)
+
+	address := fmt.Sprintf("%s:%d", config.AppHost, config.AppPort)
+
+	// Start server and handle graceful shutdown
+	serverErrors := make(chan error, 1)
+	go startServer(app, address, serverErrors)
+	handleGracefulShutdown(ctx, app, serverErrors)
+}
+
+func setupFiberApp() *fiber.App {
+	app := fiber.New(config.FiberConfig())
+
+	router.FrontendRoutes(app)
+
+	// Middleware setup
+	app.Use("/v1/auth", middleware.LimiterConfig())
+	app.Use(middleware.LoggerConfig())
+	app.Use(helmet.New())
+	app.Use(compress.New())
+	app.Use(cors.New())
+	app.Use(middleware.RecoverConfig())
+
+	return app
+}
+
+func setupDatabase() *gorm.DB {
+	db := database.Connect(config.DBHost, config.DBName)
+	// Add any additional database setup if needed
+	return db
+}
+
+func setupRoutes(app *fiber.App, db *gorm.DB) {
+	router.Routes(app, db)
+	app.Use(utils.NotFoundHandler)
+}
+
+func startServer(app *fiber.App, address string, errs chan<- error) {
+	if err := app.Listen(address); err != nil {
+		errs <- fmt.Errorf("error starting server: %w", err)
+	}
+}
+
+func closeDatabase(db *gorm.DB) {
+	sqlDB, errDB := db.DB()
+	if errDB != nil {
+		utils.Log.Errorf("Error getting database instance: %v", errDB)
+		return
 	}
 
-	godotenv.Load()
-	config.LoadConfig()
+	if err := sqlDB.Close(); err != nil {
+		utils.Log.Errorf("Error closing database connection: %v", err)
+	} else {
+		utils.Log.Info("Database connection closed successfully")
+	}
 }
 
-func main() {
-	// Initialize database
-	database.Connect()
-	defer database.Close()
+func handleGracefulShutdown(ctx context.Context, app *fiber.App, serverErrors <-chan error) {
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 
-	// Insert sample data
-	database.InsertSampleData()
+	select {
+	case err := <-serverErrors:
+		utils.Log.Fatalf("Server error: %v", err)
+	case <-quit:
+		utils.Log.Info("Shutting down server...")
+		if err := app.Shutdown(); err != nil {
+			utils.Log.Fatalf("Error during server shutdown: %v", err)
+		}
+	case <-ctx.Done():
+		utils.Log.Info("Server exiting due to context cancellation")
+	}
 
-	// Create HTTP mux
-	mux := http.NewServeMux()
-
-	// Setup routes
-	router.SetupRoutes(mux)
-
-	// Start server
-	port := config.SERVER_PORT
-	fmt.Printf("News Portal running on http://localhost%s\n", port)
-	log.Fatal(http.ListenAndServe(port, mux))
+	utils.Log.Info("Server exited")
 }
-/*APP_ENV=development
-APP_PORT=9998
-APP_HOST=localhost
-
-# Database Configuration (PostgreSQL)
-DB_TYPE=postgres
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=root
-DB_NAME=news
-
-# Server Config
-SERVER_TIMEOUT=30
-MAX_UPLOAD_SIZE=10485760
-
-# Logging
-LOG_LEVEL=info
-LOG_FILE=./logs/app.log
-DEBUG=false

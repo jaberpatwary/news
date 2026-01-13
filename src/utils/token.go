@@ -1,19 +1,19 @@
 package utils
 
 import (
-	"crypto/rand"
-	"encoding/hex"
 	"time"
+
+	"github.com/golang-jwt/jwt/v5"
 )
 
-func GenerateToken(length int) (string, error) {
-	bytes := make([]byte, length)
-	if _, err := rand.Read(bytes); err != nil {
-		return "", err
+func GenerateToken(userID string, tokenType string, expMinutes int, secret string) (string, error) {
+	claims := jwt.MapClaims{
+		"sub":  userID,
+		"type": tokenType,
+		"exp":  time.Now().Add(time.Minute * time.Duration(expMinutes)).Unix(),
+		"iat":  time.Now().Unix(),
 	}
-	return hex.EncodeToString(bytes), nil
-}
 
-func IsTokenExpired(expiresAt time.Time) bool {
-	return time.Now().After(expiresAt)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString([]byte(secret))
 }

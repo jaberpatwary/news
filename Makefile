@@ -1,46 +1,34 @@
-.PHONY: help run build clean test dev prod
+include .env
+# export $(shell sed 's/=.*//' .env) # Linux specific, causing errors on Windows
 
-help:
-	@echo "News Portal - Available commands:"
-	@echo "  make run      - Run development server"
-	@echo "  make build    - Build binary"
-	@echo "  make clean    - Clean build artifacts"
-	@echo "  make test     - Run tests"
-	@echo "  make dev      - Run with hot reload"
-	@echo "  make prod     - Build for production"
-
-run:
-	go run src/main.go
-
-build:
-	go build -o news-portal src/main.go
-
-clean:
-	rm -f news-portal
-	rm -f news.db
-	rm -rf frontend/uploads/*
-
-test:
-	go test ./...
-
-dev:
-	@command -v air > /dev/null || go install github.com/cosmtrek/air@latest
-	air
-
-prod:
-	CGO_ENABLED=1 go build -ldflags="-s -w" -o news-portal src/main.go
-	@echo "Build complete: ./news-portal"
-
-install-deps:
-	go mod download
-	go mod tidy
-
-fmt:
-	go fmt ./...
-
+start:
+	@go run src/main.go
 lint:
-	@command -v golangci-lint > /dev/null || go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-	golangci-lint run ./...
-.PHONY: docker
+	@golangci-lint run
+tests:
+	@go test -v ./test/...
+tests-%:
+	@go test -v ./test/... -run=$(shell echo $* | sed 's/_/./g')
+testsum:
+	@cd test && gotestsum --format testname
+swagger:
+	@cd src && swag init
+migration-%:
+	@migrate create -ext sql -dir src/database/migrations create-table-$(subst :,_,$*)
+migrate-up:
+	@migrate -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable" -path src/database/migrations up
+migrate-down:
+	@migrate -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable" -path src/database/migrations down
+migrate-docker-up:
+	@docker run -v ./src/database/migrations:/migrations --network go-fiber-boilerplate_go-network migrate/migrate -path=/migrations/ -database postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable up
+migrate-docker-down:
+	@docker run -v ./src/database/migrations:/migrations --network go-fiber-boilerplate_go-network migrate/migrate -path=/migrations/ -database postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable down -all
 docker:
-	docker-compose up -d
+	@chmod -R 755 ./src/database/init
+	@docker-compose up --build
+docker-test:
+	@docker-compose up -d && make tests
+docker-down:
+	@docker-compose down --rmi all --volumes --remove-orphans
+docker-cache:
+	@docker builder prune -f

@@ -1,120 +1,112 @@
 package service
 
 import (
-	"fmt"
-	"log"
-	"news-portal/src/database"
-	"news-portal/src/model"
+	"app/src/model"
+	"time"
+
+	"gorm.io/gorm"
 )
 
-type ArticleService struct{}
+type ArticleService interface {
+	CreateArticle(a *model.Article) (*model.Article, error)
+	GetAllArticles(category, search string, limit int) ([]model.Article, error)
+	GetByID(id int) (*model.Article, error)
+	DeleteByID(id string) error
+	GetFeatured(category string, limit int) ([]model.Article, error)
+	GetCategories() ([]string, error)
+	UpdateArticle(a *model.Article) (*model.Article, error)
+}
 
-func (s *ArticleService) GetAllArticles(category, search string) ([]model.Article, error) {
-	query := "SELECT id, title, content, category, author, image, created, featured FROM articles WHERE 1=1"
-	var args []interface{}
-	placeholder := 1
+type articleService struct {
+	db *gorm.DB
+}
+
+func NewArticleService(db *gorm.DB) ArticleService {
+	return &articleService{db: db}
+}
+
+func (s *articleService) CreateArticle(a *model.Article) (*model.Article, error) {
+	a.UpdatedAt = time.Now()
+	if err := s.db.Create(a).Error; err != nil {
+		return nil, err
+	}
+	return a, nil
+}
+
+func (s *articleService) UpdateArticle(a *model.Article) (*model.Article, error) {
+	a.UpdatedAt = time.Now()
+	// Using Save or Select("*") is necessary to update boolean fields to false (zero values)
+	if err := s.db.Model(&model.Article{}).Where("id = ?", a.ID).Select("*").Updates(a).Error; err != nil {
+		return nil, err
+	}
+	return s.GetByID(a.ID)
+}
+
+func (s *articleService) GetAllArticles(category, search string, limit int) ([]model.Article, error) {
+	var items []model.Article
+	query := s.db.Order("updated_at desc")
 
 	if category != "" && category != "সব" {
-		query += fmt.Sprintf(" AND category = $%d", placeholder)
-		args = append(args, category)
-		placeholder++
+		query = query.Where("category = ?", category)
 	}
 
 	if search != "" {
-		query += fmt.Sprintf(" AND (title LIKE $%d OR content LIKE $%d)", placeholder, placeholder+1)
-		searchTerm := "%" + search + "%"
-		args = append(args, searchTerm, searchTerm)
-		placeholder += 2
+		// Use ILIKE for case-insensitive search in Postgres
+		query = query.Where("title ILIKE ? OR content ILIKE ?", "%"+search+"%", "%"+search+"%")
 	}
 
-	query += " ORDER BY created DESC LIMIT 50"
+	if limit > 0 {
+		query = query.Limit(limit)
+	}
 
-	rows, err := database.DB.Query(query, args...)
-	if err != nil {
+	if err := query.Find(&items).Error; err != nil {
 		return nil, err
 	}
-	defer rows.Close()
-
-	var articles []model.Article
-	for rows.Next() {
-		var a model.Article
-		err := rows.Scan(&a.ID, &a.Title, &a.Content, &a.Category, &a.Author, &a.Image, &a.Created, &a.Featured)
-		if err != nil {
-			log.Println("Error scanning article:", err)
-			continue
-		}
-		articles = append(articles, a)
-	}
-
-	return articles, nil
+	return items, nil
 }
 
-func (s *ArticleService) GetFeaturedArticles() ([]model.Article, error) {
-	rows, err := database.DB.Query("SELECT id, title, content, category, author, image, created, featured FROM articles WHERE featured = true ORDER BY created DESC LIMIT 5")
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	var articles []model.Article
-	for rows.Next() {
-		var a model.Article
-		err := rows.Scan(&a.ID, &a.Title, &a.Content, &a.Category, &a.Author, &a.Image, &a.Created, &a.Featured)
-		if err != nil {
-			log.Println("Error scanning article:", err)
-			continue
-		}
-		articles = append(articles, a)
-	}
-
-	return articles, nil
-}
-
-func (s *ArticleService) GetArticleByID(id string) (*model.Article, error) {
+func (s *articleService) GetByID(id int) (*model.Article, error) {
 	var a model.Article
-	err := database.DB.QueryRow("SELECT id, title, content, category, author, image, created, featured FROM articles WHERE id = $1", id).Scan(
-		&a.ID, &a.Title, &a.Content, &a.Category, &a.Author, &a.Image, &a.Created, &a.Featured,
-	)
-	if err != nil {
+	if err := s.db.First(&a, id).Error; err != nil {
 		return nil, err
 	}
-
 	return &a, nil
 }
 
-func (s *ArticleService) CreateArticle(article *model.Article) (*model.Article, error) {
-	log.Println("DEBUG: Starting CreateArticle service")
-	query := `INSERT INTO articles (title, content, category, author, image, featured) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`
-	log.Printf("DEBUG: Executing query: %s", query)
-	
-	err := database.DB.QueryRow(query, article.Title, article.Content, article.Category, article.Author, article.Image, article.Featured).Scan(&article.ID)
-	if err != nil {
-		log.Printf("DEBUG: Database error: %v", err)
-		return nil, err
-	}
-
-	log.Printf("DEBUG: Article created with ID: %d", article.ID)
-	return article, nil
+func (s *articleService) DeleteByID(id string) error {
+	// GORM Delete needs the primary key to be specified if not using a pointer with ID
+	return s.db.Where("id = ?", id).Delete(&model.Article{}).Error
 }
 
-func (s *ArticleService) GetCategories() ([]string, error) {
-	rows, err := database.DB.Query("SELECT DISTINCT category FROM articles")
-	if err != nil {
+func (s *articleService) GetFeatured(category string, limit int) ([]model.Article, error) {
+	var items []model.Article
+	query := s.db.Where("featured = ?", true).Order("updated_at desc")
+
+	if category != "" && category != "সব" {
+		query = query.Where("category = ?", category)
+	}
+
+	if limit > 0 {
+		query = query.Limit(limit)
+	}
+
+	if err := query.Find(&items).Error; err != nil {
 		return nil, err
 	}
-	defer rows.Close()
+	return items, nil
+}
 
-	var categories []string
-	categories = append(categories, "সব")
-	for rows.Next() {
-		var cat string
-		err := rows.Scan(&cat)
-		if err != nil {
-			log.Println("Error scanning category:", err)
-			continue
-		}
-		categories = append(categories, cat)
+func (s *articleService) GetCategories() ([]string, error) {
+	// Syncing with the Admin Panel list as requested
+	categories := []string{
+		"জাতীয়",
+		"রাজনীতি",
+		"খেলাধুলা",
+		"প্রযুক্তি",
+		"স্বাস্থ্য",
+		"বিনোদন",
+		"আন্তর্জাতিক",
+		"অন্যান্য",
 	}
-
 	return categories, nil
 }

@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>দৈনিক খবর - News Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/frontend/css/style.css">
 </head>
 
@@ -18,7 +22,10 @@
 
     <nav class="navbar">
         <div class="container">
-            <input type="text" id="searchInput" class="search-box" placeholder="খবর খুঁজুন...">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-box" placeholder="খবর খুঁজুন...">
+            </div>
             <div class="categories-wrapper">
                 <div class="categories" id="categories"></div>
             </div>
